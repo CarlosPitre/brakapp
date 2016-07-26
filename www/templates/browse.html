@@ -1,7 +1,78 @@
 <ion-view view-title="Browse">
   <ion-content>
-    
-    
 
+    <div class="row">
+        <div class="col col-33">
+          <button type="button" class="button button-balanced" ng-click="Mapa()" >Mapa</button>
+        </div>
+        <div class="col col-66">
+          <div class="list">
+            <label class="item item-input item-select">
+              <div class="input-label">
+                Filtrar:
+              </div>
+              <select ng-model= "filtro" ng-change="Filtro()" >
+                <option value="1">Mejor Calificados</option>
+                <option value="2">Mejores Descuentos</option>
+                <option value="3">Mas Visitados</option>
+                <option value="4">Mas Cercanos</option>
+              </select>
+            </label>
+          </div>
+        </div>
+    </div>
+    <div class="list list-inset">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search" ng-model="filter">
+      </label>
+    </div>
+    <div class="list card" ng-repeat= "profesional in Profesionales | filter:filter">
+      <a href="javascript:;" style="text-decoration:none" ng-click="Detalles(profesional)">
+        <div class="item item-avatar">
+          <img src="http://localhost/brackapp/api/{{profesional.foto}}">
+          <h2>{{profesional.razonSocial}}</h2>
+          <p>
+            {{profesional.municipio}}
+          </p>
+          <div class="list">
+            <div class="item range range-positive">
+              <i class="icon ion-android-star-outline assertive"></i>
+              <input type="range" name="volume" min="1" max="5" value="{{profesional.calificacion}}" disabled >
+              <i class="icon ion-android-star balanced"></i>
+            </div>
+            <span>
+              <center>
+                  <p >
+                    Calificación: {{(profesional.calificacion / 5)*100}}%
+                  </p>
+              </center>
+            </span>
+          </div>
+        </div>
+      </a>
+      <div class="item item-body" ng-if= "profesional.status">
+        <img class="full-image" src="delorean.jpg">
+        <p>
+          <strong>Correo:</strong> &nbsp{{profesional.correo}}
+        </p>
+        <p>
+          <strong>Teléfono:</strong>&nbsp{{profesional.telefono}}
+        </p>
+        <p>
+          <strong>Profesión:</strong>&nbsp{{profesional.profesion}}
+        </p>
+        <p>
+          <strong>Dirección:</strong>&nbsp{{profesional.direccion}}
+        </p>
+
+        <p>
+          <a href="#" class="subdued">1 Like</a>
+          <a href="#" class="subdued">5 Comments</a>
+        </p>
+      </div>
+
+
+    </div>
   </ion-content>
 </ion-view>
