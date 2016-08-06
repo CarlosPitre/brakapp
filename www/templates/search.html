@@ -2,18 +2,11 @@
   <ion-content>
     <div class="col-80 col-offset-10">
       <div class="list list-inset">
-        <label class="item item-input">
-          <i class="icon ion-search placeholder-icon"></i>
-            <input type="text" name="name" value="" placeholder="Busca lo que quieras...">
-        </label>
+           <angucomplete ng-model="busca" id="ex2" placeholder="Ejem: Plomeria, Mantenimiento, etc..." pause="300"  localdata="Servicio" selectedobject="selectedServicio" searchfields="descripcion" titlefield="descripcion" descriptionfield="tipo" minlength="1" inputclass="form-control-buscar" matchclass="highlight" />
       </div>
-
-      <div class="col-33 col-offset-33">
-        <button class="button button-block button-balanced">
-          Buscar
-        </button>
-      </div>
+      <button class="button button-block button-balanced ion-search" ng-click = "Buscar(selectedServicio.originalObject)">
+        Buscar
+      </button>
     </div>
-
   </ion-content>
 </ion-view>
