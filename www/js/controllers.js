@@ -26,16 +26,6 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
-})
 
 .controller('SearchCtrl',function ($scope,menuService, $state) {
   $scope.Servicio = [];
@@ -50,12 +40,10 @@ angular.module('starter.controllers', [])
         	console.log('Error Al Cargar Datos', errorPl);
         });
 	}
-
   $scope.Buscar = function (json) {
     sessionStorage.setItem('json', JSON.stringify(json));
     $state.go('app.browse');
   }
-
 })
 
 .controller('ProfesionalCtrl', function ($scope,profesionalService,$ionicModal,$state,$ionicPopup, clienteService) {
@@ -291,7 +279,13 @@ angular.module('starter.controllers', [])
     }
     var promiseGet = profesionalService.postSolicitud(data);
     promiseGet.then(function (pl) {
-      alert(pl.data);
+      var alertPopup = $ionicPopup.alert({
+         title: 'Mensaje de Información',
+         template: pl.data
+       });
+       alertPopup.then(function(res) {
+         console.log('Thank you for not eating my delicious ice cream cone');
+       });
       $scope.modalSolicitud.hide();
     },
     function (errorPl) {
@@ -344,4 +338,23 @@ angular.module('starter.controllers', [])
 
 
 
-});
+})
+
+.controller('solicitudCtrl', function ($scope, solicitudService) {
+
+  $scope.Solicitudes = [];
+  loadSolicitudes()
+
+  function loadSolicitudes() {
+    var promiseGet = solicitudService.getSolicitudes(localStorage.getItem('idCliente'));
+    promiseGet.then(function (pl) {
+      $scope.Solicitudes = pl.data;
+    },
+    function (errorPl) {
+    	console.log('Error Al Cargar Datos', errorPl);
+    });
+  }
+
+})
+
+;

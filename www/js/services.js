@@ -7,6 +7,13 @@ angular.module('starter.services', [])
 	}
 })
 
+.service('solicitudService',function ($http) {
+  this.getSolicitudes = function (idCliente) {
+    var req = $http.get(uri + '/app/cliente/' + idCliente + '/solicitudes' );
+    return req;
+  }
+})
+
 .service('profesionalService', function($http) {
   this.postJSON = function  (object) {
     var req = $http.post(uri + '/app/servicio/profesionales', object);

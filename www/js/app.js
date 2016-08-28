@@ -78,7 +78,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'menuContent': {
         templateUrl: 'templates/solicitudes.html',
-        controller: 'SolicitudesCtrl'
+        controller: 'solicitudCtrl'
       }
     }
   });
